@@ -6,7 +6,7 @@
 
 //----Punto 1---//
 
-let palabra = 'Hola Mundo'
+let palabra = 'hola'
 
 function cuentaLetras(palabra) {
     if (/[^a-z A-Z]/.test(palabra)===false) {
@@ -17,6 +17,13 @@ function cuentaLetras(palabra) {
 }
 
 cuentaLetras(palabra)
+
+const cuentaLetrasArrow = (palabra) => 
+(/[^a-z A-Z]/.test(palabra)===false)
+    ? console.info(`El texto tiene ${palabra.length} caracteres`)
+    : console.warn('Tienen que ser caracteres');
+
+cuentaLetrasArrow(palabra)
 
 //----Punto 2---//
 
@@ -36,21 +43,21 @@ let palabra2='Hola Mundo'
 let numero=4
 trozo(palabra2,numero)
 
+
 //----Punto 3---//
 
-function separando(palabra3,separador) {
-    if (/[^a-z A-Z]/.test(palabra3)===false) {
-        console.log(palabra3.split([separador]))
-    } else {
-        console.log('El texto no puede contener letras ni carcateres especiales');
-    }
-}
+const separando = (palabra3='',separador=undefined) =>
+    (/[^a-z A-Z]/.test(palabra3)===true)
+        ? console.warn('El texto no puede contener letras ni caracteres especiales')
+        : (separador===undefined)
+            ? console.warn('No pusistes una longitud')
+            : console.info(palabra3.split([separador]));
 
 separando('Hola que tal', ' ')
 
 //---Punto 4---//
 
-function repetir(palabra4,repeticion) {
+/*function repetir(palabra4,repeticion) {
     if (/[^a-z A-Z]/.test(palabra4)===false) {
         if (typeof repeticion==='number' && Number.isInteger(repeticion)) {
             console.log((palabra4 + ' ').repeat(repeticion));
@@ -60,12 +67,25 @@ function repetir(palabra4,repeticion) {
     } else {
         console.log('El texto no puede contener letras ni carcateres especiales');
     }
-}
+}*/
 
 let palabra4='Hola Mundo'
-let repeticion= 3
-repetir(palabra4,repeticion)
+let repeticion= 6
+//repetir(palabra4,repeticion)
 
+const repetirArrow=(palabra4='', repeticion=undefined) => {
+    if (/[^a-z A-Z]/.test(palabra4)===true) return console.warn('El texto no puede contener letras ni carcateres especiales');
+    if (repeticion===undefined) return console.warn('No has puesto ningún número de repeticiones');
+    if (repeticion===0) return console.error('Las repeticiones no pueden ser 0');
+    if (Math.sign(repeticion)===-1) return console.error('El número no puede ser negativo');
+    if (typeof repeticion==='number' && Number.isInteger(repeticion)) {
+        console.log((palabra4 + ' ').repeat(repeticion));
+    } else {
+        console.log('El número de repeticiones debe ser un número entero')
+    }
+}
+
+repetirArrow(palabra4,repeticion)
 //--fin--//
 
 
